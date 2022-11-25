@@ -15,4 +15,8 @@ public class Ring {
         nodes.remove(node);
         return node;
     }
+
+    public static TreeSet<Node> getAll() {
+        return nodes;
+    }
 }
