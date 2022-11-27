@@ -1,14 +1,17 @@
 package ir.k9i.kelid.Ring;
 
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import ir.k9i.kelid.Node.Node;
 
+// This data structure should be replaces with better one!
 public class Ring {
-    private static TreeSet<Node> nodes = new TreeSet<>();
+    private static ArrayList<Node> nodes = new ArrayList<>();
 
     public static void push(Node node) {
-        nodes.add(node);
+        int index = Collections.binarySearch(nodes, node);
+        nodes.add(index < 0 ? -index - 1 : index, node);
     }
 
     public static Node pull(Node node) {
@@ -16,23 +19,21 @@ public class Ring {
         return node;
     }
 
-    public static TreeSet<Node> getAll() {
-        return nodes;
-    }
-
-    public static TreeSet<Node> getNextNeighbors(int id, int count) {
-        TreeSet<Node> neighbors = new TreeSet<>();
-        int index = 0;
-        for (Node node : Ring.nodes) {
-            if (node.id >= id && neighbors.size() < count) {
-                neighbors.add(node);
+    public static ArrayList<Node> getSpots(int id, int count) {
+        ArrayList<Node> temp = new ArrayList<>();
+        if (count >= nodes.size()) {
+            temp = nodes;
+        } else {
+            int index = Collections.binarySearch(nodes, new Node(id, null, null));
+            index = index < 0 ? -index - 1 : index;
+            for (int i = index; i < count + index; i++) {
+                if (i <= nodes.size()) {
+                    temp.add(nodes.get(i));
+                } else {
+                    temp.add(nodes.get(i - nodes.size()));
+                }
             }
-
-            if (Ring.nodes.size() - index <= count && neighbors.size() < count) {
-                neighbors.add(node);
-            }
-            index++;
         }
-        return neighbors;
+        return temp;
     }
 }
