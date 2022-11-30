@@ -11,6 +11,8 @@ public class Ring {
 
     public static void push(Node node) {
         int index = Collections.binarySearch(nodes, node);
+        if (index >= 0)
+            return;
         nodes.add(index < 0 ? -index - 1 : index, node);
     }
 
