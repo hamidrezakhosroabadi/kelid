@@ -21,6 +21,10 @@ public class Ring {
         return node;
     }
 
+    public static Node find(int id) {
+        return nodes.get(Collections.binarySearch(nodes, new Node(id, null, null)));
+    }
+
     public static ArrayList<Node> getSpots(int id, int count) {
         ArrayList<Node> temp = new ArrayList<>();
 
