@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 
 import ir.k9i.kelid.Node.Node;
 import ir.k9i.kelid.Ring.Ring;
+import ir.k9i.kelid.Store.Store;
 import ir.k9i.kelid.Utils.JsonTransformer;
 
 public class App {
@@ -23,6 +24,15 @@ public class App {
             Gson gson = new Gson();
             Node node = gson.fromJson(request.body(), Node.class);
             Ring.push(node);
+            return "ok";
+        });
+
+        get("/keys/:key", (request, response) -> {
+            return Store.get(request.params(":key"));
+        });
+
+        put("/keys/:key", (request, response) -> {
+            Store.set(request.params(":key"), request.body());
             return "ok";
         });
     }
