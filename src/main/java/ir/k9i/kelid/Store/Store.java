@@ -14,7 +14,11 @@ public class Store {
         Store.integers.put(key, value);
     }
 
-    public static String get(String key) {
+    public static String get(String key, String tmp) {
         return Store.strings.get(key);
+    }
+
+    public static Integer get(String key, Integer tmp) {
+        return Store.integers.get(key);
     }
 }

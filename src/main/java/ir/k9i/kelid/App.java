@@ -28,7 +28,7 @@ public class App {
         });
 
         get("/keys/:key", (request, response) -> {
-            return Store.get(request.params(":key"));
+            return Store.get(request.params(":key"), new String());
         });
 
         put("/keys/:key", (request, response) -> {
