@@ -2,7 +2,7 @@ package ir.k9i.kelid.Containers;
 
 import java.util.HashMap;
 
-public class Container<Type> implements IContainer<Type> {
+public class MapContainer<Type> implements IContainer<Type> {
 
     private HashMap<String, Type> container = new HashMap<>();
 
